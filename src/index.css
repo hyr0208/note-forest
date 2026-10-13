@@ -58,7 +58,7 @@ button:focus-visible, input:focus-visible, textarea:focus-visible { outline: 2px
 .folder-select-label { display: flex; align-items: center; gap: 6px; color: #96958b; }
 .folder-select-label select { max-width: 130px; padding: 4px 0; color: #85847b; appearance: none; background: transparent; border: 0; outline: none; font-size: 9px; cursor: pointer; }
 .folder-select-label select:disabled { cursor: default; }
-.preview-toggle { margin-left: auto; padding: 4px 8px !important; color: #65785d !important; background: #eef1e9 !important; font-size: 9px !important; }
+.preview-toggle { flex: 0 0 auto; width: auto !important; min-width: max-content; margin-left: auto; padding: 4px 8px !important; color: #65785d !important; background: #eef1e9 !important; font-size: 9px !important; white-space: nowrap; word-break: keep-all; }
 .markdown-preview { min-height: 48vh; padding: 2px 0; color: #55554d; font-size: 13px; line-height: 1.9; overflow-wrap: anywhere; }
 .markdown-preview h1, .markdown-preview h2, .markdown-preview h3 { margin: 1.2em 0 .5em; color: #34342d; line-height: 1.35; }
 .markdown-preview h1 { font-size: 25px; }

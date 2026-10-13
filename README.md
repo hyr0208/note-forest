@@ -40,6 +40,14 @@ Supabase 설정 전에도 로컬 미리보기로 화면을 둘러볼 수 있습�
 
 브라우저 앱에는 Publishable key만 사용합니다. `service_role` 키는 브라우저 환경 변수나 저장소에 넣지 마세요. 데이터 접근은 마이그레이션에 정의된 RLS 정책으로 사용자 계정에 제한됩니다.
 
-## Mac에 설치
+## macOS 앱 만들기
 
-HTTPS로 배포한 사이트를 Safari에서 열고 **파일 → Dock에 추가**를 선택하면 앱처럼 실행할 수 있습니다. 배포 환경에서는 Supabase Auth의 허용 리디렉션 URL에도 사이트 주소를 추가해야 합니다.
+Cloudflare Pages에 배포한 뒤 아래 명령으로 설치용 DMG를 만들 수 있습니다.
+
+```bash
+npm run build:macos -- https://note-forest.pages.dev
+```
+
+결과는 `dist/macos/note-forest-macos.dmg`에 생성됩니다. DMG를 열고 `Note Forest.app`을 Applications로 드래그해 설치합니다. 다른 도메인을 연결했다면 명령의 URL을 실제 서비스 주소로 바꿉니다.
+
+이 macOS 앱은 설치 가능한 창과 앱 아이콘을 제공하고, 노트숲 웹 서비스를 열어 사용합니다. 메모 동기화에는 인터넷 연결이 필요합니다. 이 빌드는 개인 설치를 위한 ad-hoc 서명이므로 macOS가 처음 실행을 확인할 수 있습니다. 다른 사람에게 경고 없이 배포하려면 Apple Developer ID 서명과 공증이 추가로 필요합니다.
