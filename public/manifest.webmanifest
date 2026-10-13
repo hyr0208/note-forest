@@ -1,0 +1,20 @@
+{
+  "id": "/",
+  "name": "노트숲 — 나만의 메모 공간",
+  "short_name": "노트숲",
+  "description": "어디서든 이어 쓰는 나만의 메모 공간",
+  "lang": "ko-KR",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#faf9f6",
+  "theme_color": "#f6f5f0",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}

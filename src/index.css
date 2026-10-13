@@ -43,6 +43,61 @@ button:focus-visible, input:focus-visible, textarea:focus-visible { outline: 2px
 .folder-heading { display: flex; align-items: center; justify-content: space-between; margin: 28px 3px 8px 10px; color: #a19f94; font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
 .folder-heading .icon-button { width: 25px; height: 25px; }
 .folder-nav .nav-link { height: 34px; }
+.folder-nav-row { position: relative; display: flex; align-items: center; }
+.folder-nav-row .nav-link { flex: 1; padding-right: 52px; }
+.folder-nav-row .folder-menu, .folder-nav-row .folder-delete { position: absolute; top: 1px; display: none; width: 27px; height: 30px; }
+.folder-nav-row .folder-menu { right: 25px; }
+.folder-nav-row .folder-delete { right: 2px; color: #9c8e83; background: transparent; border: 0; border-radius: 7px; cursor: pointer; }
+.folder-nav-row:hover .folder-menu, .folder-nav-row:hover .folder-delete, .folder-nav-row:focus-within .folder-menu, .folder-nav-row:focus-within .folder-delete { display: grid; }
+.folder-nav-row.selected { background: #e9ede5; border-radius: 8px; }
+.folder-nav-row.selected .nav-link { background: transparent; }
+.trash-link { margin-top: 13px; }
+.sort-label { display: flex; align-items: center; gap: 5px; color: #898980; font-size: 10px; }
+.inline-error { padding: 8px 16px; color: #925347; background: #fff2ef; border-bottom: 1px solid #f2d9d3; font-size: 10px; }
+.status-error { background: #c86f5e; }
+.folder-select-label { display: flex; align-items: center; gap: 6px; color: #96958b; }
+.folder-select-label select { max-width: 130px; padding: 4px 0; color: #85847b; appearance: none; background: transparent; border: 0; outline: none; font-size: 9px; cursor: pointer; }
+.folder-select-label select:disabled { cursor: default; }
+.preview-toggle { margin-left: auto; padding: 4px 8px !important; color: #65785d !important; background: #eef1e9 !important; font-size: 9px !important; }
+.markdown-preview { min-height: 48vh; padding: 2px 0; color: #55554d; font-size: 13px; line-height: 1.9; overflow-wrap: anywhere; }
+.markdown-preview h1, .markdown-preview h2, .markdown-preview h3 { margin: 1.2em 0 .5em; color: #34342d; line-height: 1.35; }
+.markdown-preview h1 { font-size: 25px; }
+.markdown-preview h2 { font-size: 20px; }
+.markdown-preview h3 { font-size: 16px; }
+.markdown-preview p { margin: .5em 0 1em; }
+.markdown-preview ul, .markdown-preview ol { padding-left: 1.6em; margin: .5em 0 1em; }
+.markdown-preview blockquote { padding: 1px 0 1px 14px; margin: 1em 0; color: #77796e; border-left: 3px solid #9aaa8c; }
+.markdown-preview pre { padding: 13px 15px; overflow-x: auto; background: #f4f3ed; border-radius: 8px; }
+.markdown-preview code { padding: 2px 4px; background: #f2f1eb; border-radius: 4px; font-size: .9em; }
+.markdown-preview pre code { padding: 0; background: transparent; }
+.markdown-preview a { color: #587351; text-decoration: underline; text-underline-offset: 3px; }
+.markdown-preview table { width: 100%; border-collapse: collapse; }
+.markdown-preview th, .markdown-preview td { padding: 6px 9px; border: 1px solid #e8e7e1; text-align: left; }
+.auth-shell { display: grid; place-items: center; min-height: 100vh; padding: 25px; background: radial-gradient(ellipse at 50% 15%, #eef0e8 0, #f8f7f2 45%, #f5f3ec 100%); }
+.auth-card { width: min(100%, 410px); padding: 35px 37px 28px; background: #fffefa; border: 1px solid #eae9e1; border-radius: 18px; box-shadow: 0 18px 60px #3d443314; }
+.auth-brand { display: flex; align-items: center; gap: 10px; margin-bottom: 31px; font-size: 16px; font-weight: 760; letter-spacing: -.06em; }
+.auth-kicker { margin: 0 0 7px; color: #87917b; font-size: 9px; font-weight: 700; letter-spacing: .12em; }
+.auth-card h1 { margin: 0 0 8px; color: #2e3029; font-size: 26px; letter-spacing: -.06em; }
+.auth-intro { margin: 0 0 24px; color: #929188; font-size: 11px; }
+.auth-form { display: grid; gap: 14px; }
+.auth-form label { display: grid; gap: 7px; color: #5f6057; font-size: 10px; font-weight: 650; }
+.auth-form input, .folder-modal input { width: 100%; height: 40px; padding: 0 11px; color: #34342d; background: #fbfaf6; border: 1px solid #e9e8e0; border-radius: 8px; outline: 0; font-size: 11px; }
+.auth-form input:focus, .folder-modal input:focus { border-color: #94a58b; box-shadow: 0 0 0 3px #eaf0e6; }
+.auth-submit, .modal-submit { height: 40px; margin-top: 4px; color: white; background: #667f61; border: 0; border-radius: 8px; font-size: 11px; font-weight: 650; cursor: pointer; }
+.auth-submit:disabled, .modal-submit:disabled { opacity: .55; cursor: wait; }
+.auth-message { margin: 0; padding: 9px 10px; color: #61705b; background: #eff2eb; border-radius: 7px; font-size: 10px; line-height: 1.5; }
+.auth-toggle { margin: 19px 0 0; color: #98978d; text-align: center; font-size: 10px; }
+.auth-toggle button { padding: 0 2px; color: #5e7759; background: transparent; border: 0; font-size: inherit; font-weight: 700; cursor: pointer; }
+.auth-footnote { padding-top: 17px; margin: 21px 0 0; color: #aaa99f; border-top: 1px solid #f0efe9; text-align: center; font-size: 9px; }
+.auth-loading { color: #73836c; font-size: 12px; }
+.modal-backdrop { position: fixed; z-index: 20; inset: 0; display: grid; place-items: center; padding: 20px; background: #20221d52; backdrop-filter: blur(3px); }
+.folder-modal { position: relative; width: min(100%, 360px); padding: 25px; background: #fffefa; border: 1px solid #eae9e1; border-radius: 16px; box-shadow: 0 18px 60px #27282030; }
+.modal-icon { display: grid; place-items: center; width: 36px; height: 36px; margin-bottom: 15px; color: #6d8164; background: #edf0e9; border-radius: 11px; }
+.modal-close { position: absolute; top: 15px; right: 15px; display: grid; place-items: center; width: 30px; height: 30px; color: #929188; background: transparent; border: 0; border-radius: 7px; cursor: pointer; }
+.folder-modal h2 { margin: 0 0 6px; font-size: 16px; letter-spacing: -.04em; }
+.folder-modal p { margin: 0 0 15px; color: #96958b; font-size: 10px; }
+.folder-modal input { margin-bottom: 10px; }
+.modal-submit { width: 100%; }
 .folder-empty { margin: 8px 10px; color: #aaa99f; font-size: 11px; line-height: 1.55; }
 .sidebar-bottom { margin-top: auto; }
 .sync-card { display: flex; gap: 10px; padding: 12px 10px; margin: 0 1px 13px; background: #eeeee8; border: 1px solid #e9e8e0; border-radius: 10px; }
@@ -149,4 +204,5 @@ button:focus-visible, input:focus-visible, textarea:focus-visible { outline: 2px
   .editor-date { margin-bottom: 11px; }
   .format-row { margin-top: 23px; }
   .body-input { min-height: 55vh; }
+  .auth-card { padding: 29px 23px 23px; }
 }
