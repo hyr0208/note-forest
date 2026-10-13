@@ -1,64 +1,91 @@
-# 노트숲 (Note Forest)
+<div align="center">
+  <img src="public/favicon.svg" alt="노트숲 아이콘" width="72" />
+  <h1>노트숲 · Note Forest</h1>
+  <p><strong>생각을 가볍게 기록하고, 어디서든 이어 쓰는 나만의 메모 공간</strong></p>
+  <p>
+    <a href="https://notes.yyyerin.co.kr">웹에서 노트숲 열기</a>
+    ·
+    <a href="https://github.com/hyr0208/note-forest/releases/latest/download/note-forest-macos.dmg">맥 앱 다운로드</a>
+  </p>
+</div>
 
-어디서든 이어 쓰는 나만의 메모 공간.
+<p align="center">
+  <img src="docs/images/note-forest-preview.png" alt="노트숲 로그인 화면 미리보기" width="840" />
+</p>
 
-노트숲은 메모를 빠르게 작성하고 정리해 여러 기기에서 이어 볼 수 있는 개인용 웹앱입니다.
+## 노트숲 소개
 
-## 기능
+노트숲은 메모를 빠르게 작성하고 정리해 여러 기기에서 이어 볼 수 있는 개인용 노트 앱입니다. 웹 브라우저와 설치형 macOS 앱에서 같은 계정으로 사용할 수 있습니다.
 
-- 이메일과 비밀번호로 가입 및 로그인
-- 계정별 메모와 폴더 저장, 기기 간 실시간 동기화
-- 자동 저장, 검색, 즐겨찾기
-- Markdown 편집과 미리보기
-- 휴지통과 복원, Markdown 파일 내보내기
-- Mac Dock 등에서 앱처럼 여는 PWA 구성
-- Supabase Row Level Security로 사용자별 데이터 분리
+## 주요 기능
+
+| 기록과 정리 | 동기화와 관리 |
+| --- | --- |
+| Markdown 작성 및 미리보기 | 이메일 계정으로 로그인 |
+| 폴더, 즐겨찾기, 검색 | 계정별 클라우드 저장과 실시간 동기화 |
+| 자동 저장 | 휴지통에서 메모 복원 |
+| 메모를 Markdown 파일로 내보내기 | macOS 설치 앱 제공 |
 
 ## 기술 스택
 
-- React, Vite, TypeScript
-- Tailwind CSS 4
-- Supabase Auth, Postgres, Realtime
-- react-markdown, remark-gfm, lucide-react
+- **Frontend:** React, Vite, TypeScript, Tailwind CSS 4
+- **Backend:** Supabase Auth, Postgres, Realtime, Row Level Security
+- **Markdown:** react-markdown, remark-gfm
+- **macOS 앱:** Swift, WKWebView
+- **배포:** Cloudflare Pages, GitHub Actions Releases
 
-## 로컬 개발
+## 로컬에서 실행하기
 
 ```bash
+git clone https://github.com/hyr0208/note-forest.git
+cd note-forest
 npm install
+cp .env.example .env.local
+```
+
+`.env.local`에 Supabase URL과 Publishable key를 입력한 다음 개발 서버를 실행합니다.
+
+```bash
 npm run dev
 ```
 
-Supabase 설정 전에도 로컬 미리보기로 화면을 둘러볼 수 있습니다. 미리보기 메모는 현재 브라우저의 로컬 저장소에 저장됩니다.
+Supabase를 설정하지 않아도 화면을 둘러볼 수 있으며, 이때 작성한 미리보기 메모는 현재 브라우저에만 저장됩니다.
 
-## 계정 동기화 설정
+## Supabase 연결
 
-1. Supabase에서 새 프로젝트를 만듭니다.
-2. Supabase SQL Editor에서 [`supabase/migrations/20261013000000_notes_folders.sql`](supabase/migrations/20261013000000_notes_folders.sql)의 내용을 실행합니다.
-3. `.env.example`을 `.env.local`로 복사하고 프로젝트 URL과 Publishable key를 `VITE_SUPABASE_URL`, `VITE_SUPABASE_PUBLISHABLE_KEY`에 입력합니다.
-4. Auth URL 설정에서 로컬 개발 주소 `http://localhost:5173`을 허용하고, 확인 이메일을 사용할 경우 이메일 발신 설정을 확인합니다.
-5. 개발 서버를 다시 시작합니다. 로그인과 계정별 클라우드 저장 화면이 활성화됩니다.
+1. Supabase에서 프로젝트를 만듭니다.
+2. SQL Editor에서 [`supabase/migrations/20261013000000_notes_folders.sql`](supabase/migrations/20261013000000_notes_folders.sql)을 실행합니다.
+3. `.env.local`에 프로젝트 값을 입력합니다.
 
-브라우저 앱에는 Publishable key만 사용합니다. `service_role` 키는 브라우저 환경 변수나 저장소에 넣지 마세요. 데이터 접근은 마이그레이션에 정의된 RLS 정책으로 사용자 계정에 제한됩니다.
+   ```dotenv
+   VITE_SUPABASE_URL=https://your-project.supabase.co
+   VITE_SUPABASE_PUBLISHABLE_KEY=your-publishable-key
+   ```
 
-## macOS 앱 만들기
+4. Supabase Authentication의 URL 설정에서 로컬 주소 `http://localhost:5173`과 배포 주소 `https://notes.yyyerin.co.kr`을 허용합니다.
+5. 개발 서버를 다시 시작합니다.
 
-Cloudflare Pages에 배포한 뒤 아래 명령으로 설치용 DMG를 만들 수 있습니다.
+브라우저에는 Publishable key만 사용합니다. `service_role` 키는 `.env.local`이나 저장소에 넣지 마세요. 메모 접근은 마이그레이션에 정의된 RLS 정책으로 사용자 계정별 제한을 적용합니다.
 
-```bash
-npm run build:macos -- https://note-forest.pages.dev
-```
+## macOS 앱
 
-결과는 `dist/macos/note-forest-macos.dmg`에 생성됩니다. DMG를 열고 `Note Forest.app`을 Applications로 드래그해 설치합니다. 다른 도메인을 연결했다면 명령의 URL을 실제 서비스 주소로 바꿉니다.
-
-### GitHub에 macOS 설치 파일 올리기
-
-`dist`는 Git에서 제외되어 있어 DMG를 소스 코드 저장소에 직접 커밋하지 않습니다. 대신 `v1.0.0`처럼 버전 태그를 GitHub에 올리면 GitHub Actions가 macOS 설치 파일을 만들고 GitHub Release에 첨부합니다.
+배포된 웹 앱을 여는 설치형 앱을 빌드합니다. 메모를 동기화하려면 인터넷 연결이 필요합니다.
 
 ```bash
-git tag v1.0.0
-git push origin v1.0.0
+npm run build:macos -- https://notes.yyyerin.co.kr
 ```
 
-릴리스가 만들어지면 GitHub 저장소의 **Releases**에서 `note-forest-macos.dmg`를 내려받을 수 있습니다. 다음 버전은 `v1.0.1`, `v1.1.0`처럼 새 태그를 사용합니다.
+DMG는 `dist/macos/note-forest-macos.dmg`에 생성됩니다. 파일을 열어 `Note Forest.app`을 Applications 폴더로 드래그해 설치합니다.
 
-이 macOS 앱은 설치 가능한 창과 앱 아이콘을 제공하고, 노트숲 웹 서비스를 열어 사용합니다. 메모 동기화에는 인터넷 연결이 필요합니다. 이 빌드는 개인 설치를 위한 ad-hoc 서명이므로 macOS가 처음 실행을 확인할 수 있습니다. 다른 사람에게 경고 없이 배포하려면 Apple Developer ID 서명과 공증이 추가로 필요합니다.
+### GitHub Release 만들기
+
+버전 태그를 푸시하면 GitHub Actions가 macOS 앱을 빌드하고 DMG를 Release에 첨부합니다. `dist`는 Git에서 제외되어 있어 설치 파일을 소스 코드와 별도로 관리합니다.
+
+```bash
+git tag v1.0.2
+git push origin main v1.0.2
+```
+
+`v1.0.2`는 예시입니다. 다음 릴리스에는 아직 사용하지 않은 새 버전 태그를 지정하세요. 설치 파일은 [Releases](https://github.com/hyr0208/note-forest/releases)에서 받을 수 있습니다.
+
+현재 빌드는 개인 설치를 위한 ad-hoc 서명이라 macOS에서 첫 실행을 확인하는 경고가 표시될 수 있습니다. 이 경고 없이 배포하려면 Developer ID 서명과 Apple 공증을 적용해야 합니다.
