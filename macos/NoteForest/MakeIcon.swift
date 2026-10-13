@@ -1,23 +1,30 @@
 import AppKit
 
-let size = 1024
+let size: CGFloat = 1024
+let scale = size / 48
+func svgPoint(_ x: CGFloat, _ y: CGFloat) -> NSPoint {
+    NSPoint(x: x * scale, y: size - y * scale)
+}
+
 let image = NSImage(size: NSSize(width: size, height: size))
 image.lockFocus()
 
 NSColor(calibratedRed: 0.447, green: 0.533, blue: 0.42, alpha: 1).setFill()
-NSBezierPath(roundedRect: NSRect(x: 0, y: 0, width: size, height: size), xRadius: 290, yRadius: 290).fill()
+NSBezierPath(roundedRect: NSRect(x: 0, y: 0, width: size, height: size), xRadius: 15 * scale, yRadius: 15 * scale).fill()
 
 let leaf = NSBezierPath()
-leaf.move(to: NSPoint(x: 465, y: 245))
-leaf.curve(to: NSPoint(x: 715, y: 775), controlPoint1: NSPoint(x: 815, y: 750), controlPoint2: NSPoint(x: 780, y: 510))
-leaf.curve(to: NSPoint(x: 465, y: 245), controlPoint1: NSPoint(x: 600, y: 780), controlPoint2: NSPoint(x: 470, y: 510))
+leaf.move(to: svgPoint(31.4, 12.2))
+leaf.curve(to: svgPoint(15.1, 25.4), controlPoint1: svgPoint(21.7, 13.0), controlPoint2: svgPoint(15.1, 17.4))
+leaf.curve(to: svgPoint(22.7, 34.1), controlPoint1: svgPoint(15.1, 30.5), controlPoint2: svgPoint(18.2, 34.1))
+leaf.curve(to: svgPoint(31.4, 12.2), controlPoint1: svgPoint(31.1, 34.1), controlPoint2: svgPoint(32.7, 21.4))
+leaf.close()
 NSColor(calibratedRed: 0.973, green: 0.973, blue: 0.945, alpha: 1).setFill()
 leaf.fill()
 
 let stem = NSBezierPath()
-stem.move(to: NSPoint(x: 330, y: 225))
-stem.curve(to: NSPoint(x: 605, y: 610), controlPoint1: NSPoint(x: 400, y: 430), controlPoint2: NSPoint(x: 500, y: 555))
-stem.lineWidth = 42
+stem.move(to: svgPoint(14.7, 37.1))
+stem.curve(to: svgPoint(27.7, 21.4), controlPoint1: svgPoint(18, 30.1), controlPoint2: svgPoint(22.1, 25.2))
+stem.lineWidth = 2.3 * scale
 stem.lineCapStyle = .round
 NSColor(calibratedRed: 0.875, green: 0.906, blue: 0.847, alpha: 1).setStroke()
 stem.stroke()
