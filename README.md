@@ -50,4 +50,15 @@ npm run build:macos -- https://note-forest.pages.dev
 
 결과는 `dist/macos/note-forest-macos.dmg`에 생성됩니다. DMG를 열고 `Note Forest.app`을 Applications로 드래그해 설치합니다. 다른 도메인을 연결했다면 명령의 URL을 실제 서비스 주소로 바꿉니다.
 
+### GitHub에 macOS 설치 파일 올리기
+
+`dist`는 Git에서 제외되어 있어 DMG를 소스 코드 저장소에 직접 커밋하지 않습니다. 대신 `v1.0.0`처럼 버전 태그를 GitHub에 올리면 GitHub Actions가 macOS 설치 파일을 만들고 GitHub Release에 첨부합니다.
+
+```bash
+git tag v1.0.0
+git push origin v1.0.0
+```
+
+릴리스가 만들어지면 GitHub 저장소의 **Releases**에서 `note-forest-macos.dmg`를 내려받을 수 있습니다. 다음 버전은 `v1.0.1`, `v1.1.0`처럼 새 태그를 사용합니다.
+
 이 macOS 앱은 설치 가능한 창과 앱 아이콘을 제공하고, 노트숲 웹 서비스를 열어 사용합니다. 메모 동기화에는 인터넷 연결이 필요합니다. 이 빌드는 개인 설치를 위한 ad-hoc 서명이므로 macOS가 처음 실행을 확인할 수 있습니다. 다른 사람에게 경고 없이 배포하려면 Apple Developer ID 서명과 공증이 추가로 필요합니다.

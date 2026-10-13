@@ -3,6 +3,7 @@ set -euo pipefail
 
 PROJECT_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 APP_URL="${1:-${NOTE_FOREST_URL:-https://note-forest.pages.dev}}"
+APP_VERSION="${NOTE_FOREST_VERSION:-1.0.0}"
 if [[ "$APP_URL" != https://* ]]; then
   echo "Use an HTTPS app URL, for example https://note-forest.pages.dev" >&2
   exit 1
@@ -62,6 +63,8 @@ cat > "$APP_PATH/Contents/Info.plist" <<'PLIST'
 PLIST
 
 /usr/libexec/PlistBuddy -c "Set :NoteForestURL $APP_URL" "$APP_PATH/Contents/Info.plist"
+/usr/libexec/PlistBuddy -c "Set :CFBundleShortVersionString $APP_VERSION" "$APP_PATH/Contents/Info.plist"
+/usr/libexec/PlistBuddy -c "Set :CFBundleVersion $APP_VERSION" "$APP_PATH/Contents/Info.plist"
 codesign --force --deep --sign - "$APP_PATH"
 
 cp -R "$APP_PATH" "$STAGE_DIR/Note Forest.app"
