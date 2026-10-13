@@ -1,4 +1,5 @@
 import { Archive, ArrowDownToLine, Folder, Heart, Leaf, LogOut, MoreHorizontal, Plus, Sparkles, Trash2 } from 'lucide-react'
+import { isNativeMacApp } from '../../../lib/native-app'
 import type { Note, NoteFolder, WorkspaceView } from '../types'
 
 type Props = {
@@ -21,9 +22,10 @@ type Props = {
 export function Sidebar(props: Props) {
   const { userLabel, emailLabel, notes, folders, activeView, isCloud, mobileListOpen, onCreateNote, onCreateFolder, onSelectView, onExport, onSignOut, onRenameFolder, onDeleteFolder } = props
   const trashCount = notes.filter((note) => Boolean(note.deletedAt)).length
+  const showAppDownload = !isNativeMacApp()
 
   return <aside className={`sidebar ${mobileListOpen ? 'mobile-visible' : ''}`}>
-    <div className="brand-row"><div className="brand-mark"><Leaf size={18} strokeWidth={2.2} /></div><span className="brand-name">노트숲</span><button className="icon-button sidebar-settings" aria-label="Markdown으로 내보내기" title="Markdown으로 내보내기" onClick={onExport}><ArrowDownToLine size={16} /></button></div>
+    <div className="brand-row"><div className="brand-mark"><Leaf size={18} strokeWidth={2.2} /></div><span className="brand-name">노트숲</span>{showAppDownload && <a className="icon-button sidebar-settings app-download-link" href="https://github.com/hyr0208/note-forest/releases/latest/download/note-forest-macos.dmg" aria-label="맥 앱 다운로드" data-tooltip="맥 앱 다운로드"><ArrowDownToLine size={16} /></a>}</div>
     <button className="create-button" onClick={onCreateNote}><Plus size={17} />새 메모<span className="shortcut">⌘ N</span></button>
     <nav className="main-nav" aria-label="메모 메뉴">
       <button className={`nav-link ${activeView === 'all' ? 'selected' : ''}`} onClick={() => onSelectView('all')}><Archive size={17} /><span>전체 메모</span><span className="nav-count">{notes.filter((note) => !note.deletedAt).length}</span></button>
@@ -41,7 +43,7 @@ export function Sidebar(props: Props) {
     <button className={`nav-link trash-link ${activeView === 'trash' ? 'selected' : ''}`} onClick={() => onSelectView('trash')}><Trash2 size={16} /><span>휴지통</span><span className="nav-count">{trashCount}</span></button>
     <div className="sidebar-bottom">
       <div className={`sync-card ${!isCloud ? 'local-sync-card' : ''}`}><div className="sync-symbol"><Sparkles size={15} /></div><div><b>{isCloud ? '모든 기기에 동기화' : '로컬 미리보기'}</b><span>{isCloud ? '계정에 안전하게 저장돼요.' : '이 브라우저에만 저장돼요.'}</span></div></div>
-      <div className="profile-row"><div className="avatar">{userLabel.slice(0, 1).toUpperCase()}</div><div className="profile-text"><b>{userLabel}</b><span>{emailLabel || (isCloud ? '개인 메모' : '동기화 설정 필요')}</span></div>{onSignOut ? <button className="icon-button" aria-label="로그아웃" onClick={onSignOut}><LogOut size={16} /></button> : <button className="icon-button" aria-label="Markdown 내보내기" title="Markdown 내보내기" onClick={onExport}><ArrowDownToLine size={16} /></button>}</div>
+      <div className="profile-row"><div className="avatar">{userLabel.slice(0, 1).toUpperCase()}</div><div className="profile-text"><b>{userLabel}</b><span>{emailLabel || (isCloud ? '개인 메모' : '동기화 설정 필요')}</span></div><div className="profile-actions"><button className="icon-button" aria-label="Markdown 내보내기" title="Markdown 내보내기" onClick={onExport}><ArrowDownToLine size={16} /></button>{onSignOut && <button className="icon-button" aria-label="로그아웃" onClick={onSignOut}><LogOut size={16} /></button>}</div></div>
     </div>
   </aside>
 }

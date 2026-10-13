@@ -55,7 +55,12 @@ final class AppDelegate: NSObject, NSApplicationDelegate, WKNavigationDelegate, 
             showLoadError()
             return
         }
-        webView.load(URLRequest(url: url))
+        var components = URLComponents(url: url, resolvingAgainstBaseURL: false)
+        var queryItems = components?.queryItems ?? []
+        queryItems.removeAll { $0.name == "noteForestApp" }
+        queryItems.append(URLQueryItem(name: "noteForestApp", value: "macos"))
+        components?.queryItems = queryItems
+        webView.load(URLRequest(url: components?.url ?? url))
     }
 
     func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool { true }
