@@ -101,7 +101,7 @@ button:focus-visible, input:focus-visible, textarea:focus-visible { outline: 2px
 .folder-modal h2 { margin: 0 0 6px; font-size: 16px; letter-spacing: -.04em; }
 .folder-modal p { margin: 0 0 15px; color: #96958b; font-size: 10px; }
 .folder-modal input { margin-bottom: 10px; }
-.modal-submit { width: 100%; }
+.modal-submit { width: 100%; white-space: nowrap; }
 .folder-empty { margin: 8px 10px; color: #aaa99f; font-size: 11px; line-height: 1.55; }
 .sidebar-bottom { margin-top: auto; }
 .sync-card { display: flex; gap: 10px; padding: 12px 10px; margin: 0 1px 13px; background: #eeeee8; border: 1px solid #e9e8e0; border-radius: 10px; }

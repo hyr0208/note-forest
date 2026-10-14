@@ -32,7 +32,7 @@ export function FolderDialog({ open, error, onClose, onCreate }: Props) {
         <label className="sr-only" htmlFor="new-folder-name">폴더 이름</label>
         <input id="new-folder-name" autoFocus maxLength={40} value={name} onChange={(event) => setName(event.target.value)} placeholder="예: 아이디어" />
         {error && <p className="inline-error" role="alert">{error}</p>}
-        <button className="auth-submit" disabled={busy}>{busy ? '만드는 중…' : '폴더 만들기'}</button>
+        <button className="auth-submit modal-submit" disabled={busy}>{busy ? '만드는 중…' : '폴더 만들기'}</button>
       </form>
     </section>
   </div>
